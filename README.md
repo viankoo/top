@@ -20,13 +20,6 @@ git remote add origin 仓库地址     与远程仓库建立连接
 15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
 16. 在线构建器：拖动表单元素生成相应的HTML代码。
 17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
-## 在线体验
-> admin/admin123  
-> 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
-
-演示地址：http://vue.ruoyi.vip  
-
-文档地址：http://doc.ruoyi.vip
 
 ## 演示图
 
@@ -61,7 +54,3 @@ git remote add origin 仓库地址     与远程仓库建立连接
     </tr>
 </table>
 
-
-## 若依前后端分离交流群
-
-QQ群： [![加入QQ群](https://img.shields.io/badge/937441-blue.svg)](https://jq.qq.com/?_wv=1027&k=5bVB1og)  点击按钮入群。
