@@ -24,8 +24,7 @@ import com.top.project.monitor.service.ISysLogininforService;
  */
 @RestController
 @RequestMapping("/monitor/logininfor")
-public class SysLogininforController extends BaseController
-{
+public class SysLogininforController extends BaseController {
     @Autowired
     private ISysLogininforService logininforService;
 

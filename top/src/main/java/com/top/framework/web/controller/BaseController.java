@@ -23,8 +23,7 @@ import com.top.framework.web.page.TableSupport;
  * 
  * @author guwei
  */
-public class BaseController
-{
+public class BaseController {
     protected final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     /**

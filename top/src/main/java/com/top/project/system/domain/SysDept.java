@@ -14,8 +14,7 @@ import com.top.framework.web.domain.BaseEntity;
  * 
  * @author guwei
  */
-public class SysDept extends BaseEntity
-{
+public class SysDept extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /** 部门ID */
