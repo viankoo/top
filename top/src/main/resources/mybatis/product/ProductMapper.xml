@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result column="price" property="price" />
         <result column="amount" property="amount" />
         <result column="sell_amount" property="sellAmount" />
+        <result column="status" property="status" />
         <result column="create_by" property="createBy" />
         <result column="create_time" property="createTime" />
         <result column="update_by" property="updateBy" />

@@ -40,6 +40,11 @@ public class Product extends BaseEntity {
      */
     private Integer amount;
     /**
+     * 商品状态
+     * 1-待审核；2-审核不通过；3-审核通过并上架；4-下架
+     */
+    private String status;
+    /**
      * 已售数量
      */
     private Integer sellAmount;
