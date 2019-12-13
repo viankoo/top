@@ -23,8 +23,7 @@ import com.top.project.system.service.ISysMenuService;
  * @author guwei
  */
 @RestController
-public class SysLoginController
-{
+public class SysLoginController {
     @Autowired
     private SysLoginService loginService;
 

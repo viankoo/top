@@ -98,4 +98,8 @@ public class Constants
      * 资源映射路径 前缀
      */
     public static final String RESOURCE_PREFIX = "/profile";
+
+    /** 校验返回结果码 */
+    public final static String UNIQUE = "0";
+    public final static String NOT_UNIQUE = "1";
 }

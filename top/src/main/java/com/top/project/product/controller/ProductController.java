@@ -9,11 +9,11 @@ import com.top.framework.web.domain.AjaxResult;
 import com.top.framework.web.page.TableDataInfo;
 import com.top.project.product.domain.Product;
 import com.top.project.product.service.ProductService;
-import com.top.project.system.domain.SysConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +62,7 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.UPDATE)
     @PutMapping("/check")
-    public AjaxResult edit(@Validated @RequestBody Product product) {
+    public AjaxResult check(@Validated @RequestBody Product product) {
         product.setUpdateBy(SecurityUtils.getUsername());
         return toAjax(productService.checkProduct(product));
     }
@@ -72,23 +72,37 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.UPDATE)
     @PutMapping("/onOffSell")
-    public AjaxResult edit(@Validated @RequestBody Product product) {
+    public AjaxResult onOffSell(@Validated @RequestBody Product product) {
         product.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(productService.checkProduct(product));
+        return toAjax(productService.onOffSellProduct(product));
     }
 
     /**
      * 根据商品编号获取详细信息
      */
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable String id) {
+        return AjaxResult.success(productService.selectProductById(id));
+    }
 
     /**
      * 根据商品编号更新商品
      */
-
+    @Log(title = "商品管理", businessType = BusinessType.UPDATE)
+    @PutMapping
+    public AjaxResult edit(@Validated @RequestBody Product product) {
+        product.setUpdateBy(SecurityUtils.getUsername());
+        return toAjax(productService.updateProduct(product));
+    }
 
     /**
      * 根据商品编号删除商品
      */
-
+    @Log(title = "商品管理", businessType = BusinessType.DELETE)
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids)
+    {
+        return toAjax(productService.deleteProductByIds(ids));
+    }
 
 }

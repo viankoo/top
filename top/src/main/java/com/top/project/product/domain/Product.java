@@ -49,6 +49,10 @@ public class Product extends BaseEntity {
      */
     private Integer sellAmount;
     /**
+     * 已售数量
+     */
+    private String checkReason;
+    /**
      * 创建者
      */
     private String createBy;
