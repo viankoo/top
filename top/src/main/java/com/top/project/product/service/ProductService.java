@@ -1,7 +1,10 @@
 package com.top.project.product.service;
 
+import com.top.common.exception.file.InvalidExtensionException;
 import com.top.project.product.domain.Product;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -30,7 +33,7 @@ public interface ProductService {
      * @param product
      * @return
      */
-    int insertProduct(Product product);
+    int insertProduct(Product product,MultipartFile[] files) throws IOException, InvalidExtensionException, Exception;
 
     /**
      * 根据商品编号审核商品
@@ -58,7 +61,7 @@ public interface ProductService {
      * @param product
      * @return
      */
-    int updateProduct(Product product);
+    int updateProduct(Product product,MultipartFile[] files) throws IOException, InvalidExtensionException, Exception;
 
     /**
      * 根据商品编号删除商品

@@ -47,6 +47,7 @@ public class CaptchaController
             AjaxResult ajax = AjaxResult.success();
             ajax.put("uuid", uuid);
             ajax.put("img", Base64.encode(stream.toByteArray()));
+            System.out.println("验证码："+verifyCode);
             return ajax;
         }
         catch (Exception e)

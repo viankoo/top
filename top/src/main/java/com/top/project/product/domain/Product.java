@@ -3,6 +3,7 @@ package com.top.project.product.domain;
 import com.top.framework.web.domain.BaseEntity;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,6 +23,7 @@ public class Product extends BaseEntity {
     /**
      * 商品名称
      */
+    @NotBlank(message = "商品名称不能为空")
     private String productName;
     /**
      * 商品图片路径

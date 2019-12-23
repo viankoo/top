@@ -13,8 +13,7 @@ import com.top.common.utils.StringUtils;
  * 
  * @author guwei
  */
-public class Convert
-{
+public class Convert {
     /**
      * 转换为字符串<br>
      * 如果给定的值为null，或者转换失败，返回默认值<br>
@@ -24,14 +23,11 @@ public class Convert
      * @param defaultValue 转换错误时的默认值
      * @return 结果
      */
-    public static String toStr(Object value, String defaultValue)
-    {
-        if (null == value)
-        {
+    public static String toStr(Object value, String defaultValue) {
+        if (null == value) {
             return defaultValue;
         }
-        if (value instanceof String)
-        {
+        if (value instanceof String) {
             return (String) value;
         }
         return value.toString();

@@ -3,13 +3,19 @@ package com.top.project.product.service;
 import com.top.common.constant.Constants;
 import com.top.common.constant.ProductConstans;
 import com.top.common.constant.UserConstants;
+import com.top.common.exception.file.InvalidExtensionException;
 import com.top.common.utils.StringUtils;
+import com.top.common.utils.file.FileUploadUtils;
+import com.top.common.utils.file.MimeTypeUtils;
+import com.top.framework.config.TopConfig;
 import com.top.project.product.domain.Product;
 import com.top.project.product.mapper.ProductMapper;
 import com.top.project.system.domain.SysConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,8 +45,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int insertProduct(Product product) {
+    public int insertProduct(Product product, MultipartFile[] files) throws Exception {
+        product.setProductImg(getImgPath(files));
         return productMapper.insertProduct(product);
+    }
+
+    private String getImgPath(MultipartFile[] files) throws IOException, InvalidExtensionException {
+        if (StringUtils.isNotEmpty(files)) {
+            StringBuffer sb = new StringBuffer();
+            for (MultipartFile file : files) {
+                String upload = FileUploadUtils.upload(TopConfig.getUploadPath(), file, MimeTypeUtils.IMAGE_EXTENSION);
+                sb.append(upload).append(";");
+            }
+            return sb.substring(0, sb.length() - 1);
+        }
+        return "";
     }
 
     @Override
@@ -59,7 +78,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int updateProduct(Product product) {
+    public int updateProduct(Product product, MultipartFile[] files) throws Exception {
+        product.setProductImg(getImgPath(files));
         return productMapper.updateProduct(product);
     }
 

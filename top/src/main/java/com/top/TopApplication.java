@@ -14,6 +14,6 @@ public class TopApplication {
     public static void main(String[] args) {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(TopApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  后台启动成功   ლ(´ڡ`ლ)ﾞ  ");
+        System.out.println("(♥◠‿◠)ﾉﾞ 牛逼啊 后台启动成功 开始拯救银河系的第一步了  ლ(´ڡ`ლ)ﾞ  ");
     }
 }

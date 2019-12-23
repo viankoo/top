@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -49,12 +51,12 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@Validated @RequestBody Product product) {
+    public AjaxResult add(@Validated Product product, MultipartFile[] files) throws Exception {
         if (UserConstants.NOT_UNIQUE.equals(productService.checkProductNameUnique(product))) {
             return AjaxResult.error("新增商品'" + product.getProductName() + "'失败，商品名称已存在");
         }
         product.setCreateBy(SecurityUtils.getUsername());
-        return toAjax(productService.insertProduct(product));
+        return toAjax(productService.insertProduct(product,files));
     }
 
     /**
@@ -90,9 +92,9 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated @RequestBody Product product) {
+    public AjaxResult edit(@Validated Product product, MultipartFile[] files) throws Exception {
         product.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(productService.updateProduct(product));
+        return toAjax(productService.updateProduct(product, files));
     }
 
     /**

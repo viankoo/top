@@ -23,7 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="SELECT_ALL">
-        select product_id, product_name, product_img, description, price, amount, sell_amount, status, check_reasion, create_by, create_time, update_by, update_time, remark
+        select product_id, product_name, product_img, description, price, amount, sell_amount, status, check_reason, create_by, create_time, update_by, update_time, remark
         from bus_product
     </sql>
 
@@ -120,12 +120,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </delete>
 
-    <select id="checkProductNameUnique">
+    <select id="checkProductNameUnique" resultMap="BaseResultMap">
         <include refid="SELECT_ALL"/>
         WHERE product_name = #{productName}
     </select>
 
-    <select id="selectProductById">
+    <select id="selectProductById" resultMap="BaseResultMap">
         <include refid="SELECT_ALL"/>
         WHERE product_id = #{id}
     </select>

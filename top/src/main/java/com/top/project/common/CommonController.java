@@ -22,8 +22,7 @@ import com.top.framework.web.domain.AjaxResult;
  * @author guwei
  */
 @RestController
-public class CommonController
-{
+public class CommonController {
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
     @Autowired
@@ -69,8 +68,7 @@ public class CommonController
     @PostMapping("/common/upload")
     public AjaxResult uploadFile(MultipartFile file) throws Exception
     {
-        try
-        {
+        try {
             // 上传文件路径
             String filePath = TopConfig.getUploadPath();
             // 上传并返回新文件名称
@@ -80,9 +78,7 @@ public class CommonController
             ajax.put("fileName", fileName);
             ajax.put("url", url);
             return ajax;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return AjaxResult.error(e.getMessage());
         }
     }
