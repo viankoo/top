@@ -9,7 +9,7 @@ top:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置 D:/top/uploadPath，Linux配置 /top/uploadPath）
-  profile: /top/uploadPath
+  profile: D:/top/uploadPath
   # 获取ip地址开关
   addressEnabled: true
 
@@ -58,9 +58,9 @@ spring:
   # redis 配置
   redis:
     # 地址 172.16.112.100  localhost
-    host: localhost
+    host: 172.16.112.100
     # 端口 30379  6379
-    port: 6379
+    port: 30379
     # 连接超时时间
     timeout: 10s
     database: 5
