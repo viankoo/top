@@ -51,7 +51,7 @@ public class Product extends BaseEntity {
      */
     private Integer sellAmount;
     /**
-     * 已售数量
+     * 审批不通过理由
      */
     private String checkReason;
     /**
@@ -75,5 +75,13 @@ public class Product extends BaseEntity {
      */
     private String remark;
 
+    /**
+     * 商品类型
+     */
+    private String productType;
 
+    /**
+     * 详细信息
+     */
+    private String detail;
 }

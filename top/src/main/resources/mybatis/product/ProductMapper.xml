@@ -20,10 +20,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result column="update_by" property="updateBy" />
         <result column="update_time" property="updateTime" />
         <result column="remark" property="remark" />
+        <result column="product_type" property="productType" />
+        <result column="detail" property="detail" />
     </resultMap>
 
     <sql id="SELECT_ALL">
-        select product_id, product_name, product_img, description, price, amount, sell_amount, status, check_reason, create_by, create_time, update_by, update_time, remark
+        select product_id, product_name, product_img, description, price, amount, sell_amount, status, check_reason,
+        create_by, create_time, update_by, update_time, remark, product_type, detail
         from bus_product
     </sql>
 
@@ -34,7 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 and product_id = #{productId}
             </if>
             <if test="productName !=null and productName != ''">
-                and product_name = #{productName}
+                and product_name like concat('%', #{productName}, '%')
             </if>
             <if test="productImg !=null and productImg != ''">
                 and product_img = #{productImg}
@@ -63,6 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="selectProductList" resultMap="BaseResultMap">
         <include refid="SELECT_ALL"/>
         <include refid="WHERE_ALL"/>
+        ORDER BY create_time DESC
     </select>
 
     <insert id="insertProduct">
@@ -78,6 +82,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="checkReason != null and checkReason != '' ">check_reason,</if>
         <if test="createBy != null and createBy != ''">create_by,</if>
         <if test="remark != null and remark != ''">remark,</if>
+        <if test="productType != null and productType != ''">product_type,</if>
+        <if test="detail != null and detail != ''">detail,</if>
         create_time
         )values(
         <if test="productId != null and productId != '' ">#{productId},</if>
@@ -91,6 +97,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="checkReason != null and checkReason != '' ">#{checkReason},</if>
         <if test="createBy != null and createBy != ''">#{createBy},</if>
         <if test="remark != null and remark != ''">#{remark},</if>
+        <if test="productType != null and productType != ''">#{productType},</if>
+        <if test="detail != null and detail != ''">#{detail},</if>
         sysdate()
         )
     </insert>
@@ -108,6 +116,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="checkReason != null and checkReason != '' ">check_reason = #{checkReason},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
             <if test="remark != null">remark = #{remark},</if>
+            <if test="productType != null and productType != ''">product_type = #{productType},</if>
+            <if test="detail != null and detail != ''">detail = #{detail},</if>
             update_time = sysdate()
         </set>
         where product_id = #{id}
