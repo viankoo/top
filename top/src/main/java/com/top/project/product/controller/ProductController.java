@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -51,12 +53,12 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@Validated Product product, MultipartFile[] files) throws Exception {
+    public AjaxResult add(@Validated Product product) throws Exception {
         if (UserConstants.NOT_UNIQUE.equals(productService.checkProductNameUnique(product))) {
             return AjaxResult.error("新增商品'" + product.getProductName() + "'失败，商品名称已存在");
         }
         product.setCreateBy(SecurityUtils.getUsername());
-        return toAjax(productService.insertProduct(product,files));
+        return toAjax(productService.insertProduct(product));
     }
 
     /**
@@ -92,9 +94,9 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@Validated Product product, MultipartFile[] files) throws Exception {
+    public AjaxResult edit(@Validated Product product) throws Exception {
         product.setUpdateBy(SecurityUtils.getUsername());
-        return toAjax(productService.updateProduct(product, files));
+        return toAjax(productService.updateProduct(product));
     }
 
     /**
@@ -102,8 +104,7 @@ public class ProductController extends BaseController{
      */
     @Log(title = "商品管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(productService.deleteProductByIds(ids));
     }
 

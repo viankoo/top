@@ -120,13 +120,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="detail != null and detail != ''">detail = #{detail},</if>
             update_time = sysdate()
         </set>
-        where product_id = #{id}
+        where product_id = #{productId}
     </update>
 
     <delete id="deleteProductByIds">
         delete from bus_product where product_id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
-            #{id}
+            #{productId}
         </foreach>
     </delete>
 
@@ -137,7 +137,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectProductById" resultMap="BaseResultMap">
         <include refid="SELECT_ALL"/>
-        WHERE product_id = #{id}
+        WHERE product_id = #{productId}
     </select>
 
 </mapper>

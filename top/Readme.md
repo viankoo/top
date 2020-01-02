@@ -23,6 +23,7 @@
 ```
 "productName":"", //商品名称 必填
 "price":"",  //价格
+"productType":'', //商品类型
 "description":"", //商品描述
 "detail":"", //详细信息
 "amount":"",  //库存

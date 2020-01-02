@@ -2,6 +2,7 @@ package com.top.project.product.domain;
 
 import com.top.framework.web.domain.BaseEntity;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
@@ -84,4 +85,5 @@ public class Product extends BaseEntity {
      * 详细信息
      */
     private String detail;
+
 }

@@ -22,8 +22,7 @@ import com.top.framework.security.handle.LogoutSuccessHandlerImpl;
  * @author guwei
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter
-{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 自定义用户认证逻辑
      */
@@ -56,8 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
      */
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception
-    {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
@@ -75,6 +73,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
      * permitAll           |   用户可以任意访问
      * rememberMe          |   允许通过remember-me登录的用户访问
      * authenticated       |   用户登录后可访问
+     *
+     * eg:只有加了@EnableGlobalMethodSecurity(prePostEnabled=true) 那么在上面使用的 @PreAuthorize(“hasAuthority(‘admin’)”)才会生效
      */
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception
@@ -91,8 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 对于登录login 验证码captchaImage 允许匿名访问
                 .antMatchers(
                         "/login",
-                        "/captchaImage",
-                        "/bus/**"
+                        "/captchaImage"
                 ).anonymous()
                 .antMatchers(
                         HttpMethod.GET,

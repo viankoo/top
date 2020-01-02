@@ -8,6 +8,7 @@ import com.top.common.utils.IdUtils;
 import com.top.common.utils.StringUtils;
 import com.top.common.utils.file.FileUploadUtils;
 import com.top.common.utils.file.MimeTypeUtils;
+import com.top.framework.aspectj.lang.annotation.Log;
 import com.top.framework.config.TopConfig;
 import com.top.project.product.domain.Product;
 import com.top.project.product.mapper.ProductMapper;
@@ -39,30 +40,18 @@ public class ProductServiceImpl implements ProductService {
     public String checkProductNameUnique(Product product) {
         String productId = StringUtils.isEmpty(product.getProductId()) ? "-1L" : product.getProductId();
         Product result = productMapper.checkProductNameUnique(product.getProductName());
-        if (StringUtils.isNotNull(result) && !result.getProductId().equals(productId)) {
+        if (StringUtils.isNotNull(result) && !productId.equals(result.getProductId())) {
             return Constants.NOT_UNIQUE;
         }
         return Constants.UNIQUE;
     }
 
     @Override
-    public int insertProduct(Product product, MultipartFile[] files) throws Exception {
+    public int insertProduct(Product product) {
         product.setProductId(IdUtils.simpleUUID());
-        product.setProductImg(getImgPath(files));
         return productMapper.insertProduct(product);
     }
 
-    private String getImgPath(MultipartFile[] files) throws IOException, InvalidExtensionException {
-        if (StringUtils.isNotEmpty(files)) {
-            StringBuffer sb = new StringBuffer();
-            for (MultipartFile file : files) {
-                String upload = FileUploadUtils.upload(TopConfig.getUploadPath(), file, MimeTypeUtils.IMAGE_EXTENSION);
-                sb.append(upload).append(";");
-            }
-            return sb.substring(0, sb.length() - 1);
-        }
-        return "";
-    }
 
     @Override
     public int checkProduct(Product product) {
@@ -80,8 +69,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int updateProduct(Product product, MultipartFile[] files) throws Exception {
-        product.setProductImg(getImgPath(files));
+    public int updateProduct(Product product) {
         return productMapper.updateProduct(product);
     }
 

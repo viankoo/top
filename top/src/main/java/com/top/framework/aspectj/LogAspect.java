@@ -187,21 +187,25 @@ public class LogAspect
     /**
      * 参数拼装
      */
-    private String argsArrayToString(Object[] paramsArray)
-    {
-        String params = "";
-        if (paramsArray != null && paramsArray.length > 0)
-        {
-            for (int i = 0; i < paramsArray.length; i++)
+    private String argsArrayToString(Object[] paramsArray) {
+        try {
+            String params = "";
+            if (paramsArray != null && paramsArray.length > 0)
             {
-                if (!isFilterObject(paramsArray[i]))
+                for (int i = 0; i < paramsArray.length; i++)
                 {
-                    Object jsonObj = JSON.toJSON(paramsArray[i]);
-                    params += jsonObj.toString() + " ";
+                    if (!isFilterObject(paramsArray[i]))
+                    {
+                        Object jsonObj = JSON.toJSON(paramsArray[i]);
+                        params += jsonObj.toString() + " ";
+                    }
                 }
             }
+            return params.trim();
+        } catch (Exception e) {
+            log.error("参数拼接异常，method [argsArrayToString], params长度 "+paramsArray.length+", 异常原因： "+e.getMessage());
         }
-        return params.trim();
+        return "";
     }
 
     /**
