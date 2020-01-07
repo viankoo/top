@@ -150,7 +150,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="商品图片" prop="noticeTitle">
+            <el-form-item label="商品图片" >
               <el-upload
                 action="handlerUpload"
                 list-type="picture-card"
@@ -165,7 +165,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="商品图片url" prop="productImg">
-              <el-input v-model="form.productImg" v-if="1 == 2" />
+              <el-input v-model="form.productImg"  />
             </el-form-item>
           </el-col>
           <el-col :span="24">
