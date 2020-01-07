@@ -233,7 +233,7 @@ export default {
     /** 查询参数列表 */
     getList() {
       this.loading = true;
-      listConfig(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+      listProduct(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.productList = response.rows;
           this.total = response.total;
           this.loading = false;
@@ -281,15 +281,15 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.configId)
+      this.ids = selection.map(item => item.productId)
       this.single = selection.length!=1
       this.multiple = !selection.length
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const configId = row.configId || this.ids
-      getConfig(configId).then(response => {
+      const productId = row.productId || this.ids
+      getProduct(productId).then(response => {
         this.form = response.data;
         this.open = true;
         this.title = "修改参数";
@@ -299,8 +299,8 @@ export default {
     submitForm: function() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.configId != undefined) {
-            updateConfig(this.form).then(response => {
+          if (this.form.productId != undefined) {
+            updateProduct(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("修改成功");
                 this.open = false;
@@ -310,7 +310,7 @@ export default {
               }
             });
           } else {
-            addConfig(this.form).then(response => {
+            addProduct(this.form).then(response => {
               if (response.code === 200) {
                 this.msgSuccess("新增成功");
                 this.open = false;
@@ -325,13 +325,13 @@ export default {
     },
     /** 删除按钮操作 */
     handleDelete(row) {
-      const configIds = row.configId || this.ids;
-      this.$confirm('是否确认删除参数编号为"' + configIds + '"的数据项?', "警告", {
+      const productIds = row.productId || this.ids;
+      this.$confirm('是否确认删除参数编号为"' + productIds + '"的数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delConfig(configIds);
+          return delProduct(productIds);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -345,7 +345,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return exportConfig(queryParams);
+          return exportProduct(queryParams);
         }).then(response => {
           this.download(response.msg);
         }).catch(function() {});
