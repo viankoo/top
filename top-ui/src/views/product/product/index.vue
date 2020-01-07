@@ -82,7 +82,7 @@
 
     <el-table v-loading="loading" :data="productList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="商品名称" align="center" prop="configId" />
+      <el-table-column label="商品名称" align="center" prop="productName" />
       <el-table-column label="商品类型" align="center" prop="productType" :show-overflow-tooltip="true" />
       <el-table-column label="商品价格" align="center" prop="price" :show-overflow-tooltip="true" />
       <el-table-column label="库存数量" align="center" prop="amount" />
@@ -151,12 +151,21 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="商品图片" prop="noticeTitle">
-              <el-input v-model="form.noticeTitle" />
+              <el-upload
+                action="handlerUpload"
+                list-type="picture-card"
+                :on-preview="handlePictureCardPreview"
+                :on-remove="handleRemove">
+                <i class="el-icon-plus"></i>
+              </el-upload>
+              <el-dialog :visible.sync="dialogVisible">
+                <img width="100%" :src="dialogImageUrl" alt="">
+              </el-dialog>
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="商品图片url" prop="productImg">
-              <el-input v-model="form.productImg" type='hidden' />
+              <el-input v-model="form.productImg" v-if="1 == 2" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -176,6 +185,8 @@
 
 <script>
 import { listProduct, getProduct, delProduct, addProduct, updateProduct, exportProduct } from "@/api/product/product";
+import { uploadFile, deleteFile, downloadFile } from "@/api/common/common";
+import Editor from '@/components/Editor';
 
 export default {
   data() {
@@ -207,6 +218,9 @@ export default {
         productName: undefined,
         productType: undefined
       },
+      // 上传图片
+      dialogImageUrl: '',
+      dialogVisible: false,
       // 表单参数
       form: {},
       // 表单校验
@@ -349,6 +363,23 @@ export default {
         }).then(response => {
           this.download(response.msg);
         }).catch(function() {});
+    },
+    //移除图片
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    //预览图片
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    //上传图片
+    handlerUpload(file) {
+      uploadFile(file).then(response => {
+        if (response.code === 200) {
+          this.form.productImg = response.url
+        }
+      })
     }
   }
 };

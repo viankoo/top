@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-// 查询参数列表
+// 查询商品列表
 export function listProduct(query) {
   return request({
     url: '/bus/product/list',
@@ -9,7 +9,7 @@ export function listProduct(query) {
   })
 }
 
-// 查询参数详细
+// 查询商品详细
 export function getProduct(productId) {
   return request({
     url: '/bus/product/' + productId,
@@ -17,15 +17,7 @@ export function getProduct(productId) {
   })
 }
 
-// // 根据参数键名查询参数值
-// export function getConfigKey(configKey) {
-//   return request({
-//     url: '/bus/product/configKey/' + configKey,
-//     method: 'get'
-//   })
-// }
-
-// 新增参数配置
+// 新增商品
 export function addProduct(data) {
   return request({
     url: '/bus/product',
@@ -34,7 +26,7 @@ export function addProduct(data) {
   })
 }
 
-// 修改参数配置
+// 修改商品
 export function updateProduct(data) {
   return request({
     url: '/bus/product',
@@ -43,7 +35,7 @@ export function updateProduct(data) {
   })
 }
 
-// 删除参数配置
+// 删除商品
 export function delProduct(productId) {
   return request({
     url: '/bus/product/' + productId,
@@ -51,7 +43,7 @@ export function delProduct(productId) {
   })
 }
 
-// 导出参数
+// 导出商品
 export function exportProduct(query) {
   return request({
     url: '/bus/product/export',
