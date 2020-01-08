@@ -64,7 +64,7 @@
           type="danger"
           icon="el-icon-delete"
           size="mini"
-          :disabled="multiple"
+          :disabled="single"
           @click="handleDelete"
           v-hasPermi="['system:product:delete']"
         >删除</el-button>
@@ -144,9 +144,9 @@
               <el-input v-model="form.price" placeholder="请输入商品价格" />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="24">
             <el-form-item label="商品描述" prop="description">
-              <el-input v-model="form.description" placeholder="请输入商品描述" />
+              <el-input type="textarea" :autosize="{minRows: 2, maxRows: 4}" v-model="form.description" placeholder="请输入商品描述" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -163,11 +163,11 @@
               </el-dialog>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <!-- <el-col :span="12">
             <el-form-item label="商品图片url" prop="productImg">
               <el-input v-model="form.productImg"  />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="24">
             <el-form-item label="详细信息">
               <Editor v-model="form.detail" />
@@ -222,7 +222,9 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       // 表单参数
-      form: {},
+      form: {
+        proudctImg:''
+      },
       // 表单校验
       rules: {
         productName: [
@@ -306,7 +308,7 @@ export default {
       getProduct(productId).then(response => {
         this.form = response.data;
         this.open = true;
-        this.title = "修改参数";
+        this.title = "修改商品";
       });
     },
     /** 提交按钮 */
